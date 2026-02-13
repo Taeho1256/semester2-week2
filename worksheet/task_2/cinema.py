@@ -38,3 +38,15 @@ def top_customers_by_spend(conn, limit):
     """
     cursor.execute(query, (limit,))
     return cursor.fetchall()
+
+    def add_ticket(conn, screening_id, customer_id, price):
+    cursor = conn.cursor()
+    query = "INSERT INTO tickets (screening_id, customer_id, price) VALUES (?, ?, ?)"
+    cursor.execute(query, (screening_id, customer_id, price))
+    conn.commit()
+
+    def update_ticket_price(conn, ticket_id, new_price):
+    cursor = conn.cursor()
+    query = "UPDATE tickets SET price = ? WHERE ticket_id = ?"
+    cursor.execute(query, (new_price, ticket_id))
+    conn.commit()
